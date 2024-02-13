@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
     if (!userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect login details.' });
+        .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
 
@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect login details.' });
+        .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
 
@@ -59,6 +59,8 @@ router.post('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).end();
     });
+  } else {
+    res.status(404).end();
   }
 });
 
